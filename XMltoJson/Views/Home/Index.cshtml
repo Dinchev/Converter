@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm("Uploader", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <input type="file" multiple name="FilesList" />
+    <input type="text" id="NewLocationPath" name="OutputPath" />
+    <input type="submit" value="Upload" />
+}
+@{
+    ViewBag.Title = "Invalid Input";
+}
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Test name="FirstTest">
+    <TestHeader>
+        <Author>kalyan.hurkat@siemens.com</Author>
+        <Summary>Sofia Demo</Summary>
+    </TestHeader>
+
+    <TestSteps>	
+        <!-- If ABT Site is open close it -->
+        <OpenABTSite ignoreResult="True"/>
+		
+		<FindABTSiteWindow />
+		<FindWpfByAutomationId id="ProjectManagerSettings" />
+		<Click />
+
+		<!-- click on User interface Tab-->
+		<FindABTSiteWindow />
+		<FindWpfByAutomationId id="Settings_UserInterface" />
+		<Click />
+
+		<!-- Active check boxen from Splash items-->
+		<FindABTSiteWindow />
+		<FindWpfCheckBox id="Settings_ShowSplashScreenOnStartup" />
+		<SetCheck p="unchecked" />
+
+		<FindABTSiteWindow />
+		<FindWpfCheckBox id="ProjectManager_Settings_ShowWorkflowHelpOnStartup" />
+		<SetCheck p="unchecked" />
+
+		<FindABTSiteWindow />
+		<FindWpfByAutomationId id="ProjectManagerProjects" />
+		<Click />
+
+        <FindABTSiteWindow/>
+        <FindWpfByClassName p0="ProjectsView"/>
+        <FindWpfGrid id="TreeGridDataGrid"/>
+        
+        <FindWpfGridRow col="0" val="QST Ethernet StaticIP"/>
+        <FindWpfGridCell p0="0" />
+        <CallMacro macro="ABTSite.ContextMenu.SelectItem" itemText="Open"/>
+        <FindABTSiteWindow/>
+        <FindWpfByClassName className="Window"/>
+        <FindWpfByClassName className="TextBox"/>
+        <SetText p0="Administrator" />
+        <FindABTSiteWindow/>
+        <FindWpfByClassName className="Window"/>
+        <FindWpfByClassName className="PasswordBox"/>
+        <SetText p0="OneBT2.2" />
+        <FindABTSiteWindow/>
+        <FindWpfByClassName className="Window"/>
+        <FindWpfByAutomationId id="Login_Button_OK"/>
+        <Click delayAfter="4000"/>
+        <FindABTSiteWindow />
+        <!-- Switch to Building -->
+        <FindWpfByAutomationId p0="Startup" />
+        <Click delayAfter="2000"/>   
+        <!-- Open Connection settings dialog -->
+        <FindABTSiteWindow/>
+        <FindWpfByAutomationId className="ToggleButton"/>
+        <Click />
+        <Wait p0="2000" />
+        <!-- Switch to Transport view -->
+        <FindABTSiteWindow/>
+        <FindWpfByClassName p1="ConnectionSettingsView"/>
+		<FindWpfByClassName name="TabControl" />
+		<FindWpfByName name="Ethernet" />
+        <Click />
+        <Wait p0="2000" />
+        <!-- Select ip radio button first -->
+        <FindABTSiteWindow/>
+        <FindWpfByAutomationId p1="Me" />
+		<FindWpfByClassName name="RadioButton" />
+		<FindWpfByName name="IP" />
+       
+        <Click />
+        <Wait p0="2000" />
+        <!-- Select Network interface -->
+        <FindABTSiteWindow />
+        <FindWpfByClassName p1="#ABTSite.View.Startup.SetupConnection.CN"/>
+        <FindWpfByAutomationId p1="ConnectionDialog_NetworkInterface"/>
+        <Click/>
+        <FindABTSiteWindow />
+        <FindWpfByName p1="vmxnet3 Ethernet Adapter #3"/>
+        <Click/>
+        <!-- Select IP address -->
+        <FindABTSiteWindow />
+        <FindWpfByClassName p1="#ABTSite.View.Startup.SetupConnection.CN"/>
+        <FindWpfByAutomationId p1="ConnectionDialog_IPAddress"/>
+        <Click/>
+        <FindABTSiteWindow />
+        <FindWpfByName p1="10.170.194.70"/>
+        <Click/>
+        <!-- Connect -->
+        <FindABTSiteWindow />
+        <FindWpfByClassName p1="#ABTSite.View.Startup.SetupConnection.CN" />
+        <FindWpfByAutomationId p1="ConnectionDialog_ConnectButton"/>
+        <Click/>
+      
+    </TestSteps>
+</Test>
